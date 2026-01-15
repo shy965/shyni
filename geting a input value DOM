@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="text" id="name">
+<button onclick="showName()">Submit</button>
+
+<p id="output"></p>
+
+<script>
+function showName() {
+    var value = document.getElementById("name").value;
+    document.getElementById("output").innerHTML = value;
+}
+</script>
+
+</body>
+</html>
