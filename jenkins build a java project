@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven3'
+    }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/example/sample-java-project.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
