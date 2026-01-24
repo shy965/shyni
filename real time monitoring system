@@ -1,0 +1,29 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+from datetime import datetime
+
+app = FastAPI()
+
+class PatientData(BaseModel):
+    patient_id: str
+    heart_rate: int
+    spo2: int
+    temperature: float
+
+@app.post("/monitor")
+def monitor_patient(data: PatientData):
+    status = analyze_vitals(data)
+    return {
+        "patient_id": data.patient_id,
+        "status": status,
+        "time": datetime.now()
+    }
+
+def analyze_vitals(data):
+    if data.heart_rate > 100:
+        return "High Heart Rate"
+    if data.spo2 < 90:
+        return "Low Oxygen"
+    if data.temperature > 38:
+        return "High Temperature"
+    return "Normal"
